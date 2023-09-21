@@ -1,21 +1,20 @@
-﻿
-var name = "Ewa";
-var sex = 'k';
-var age = 33;
+﻿int number = 4594;
+string numberAsString = number.ToString();
+char[] letters = numberAsString.ToCharArray();
+char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+int[] numberOfDigits = new int[10];
 
-if (sex == 'k' && age < 30)
+foreach (char letter in letters)
 {
-    Console.WriteLine("Kobieta poniżej 30 lat");
+    for (int i = 0; i < 10; i++)
+    {
+        if (letter == numbers[i]) { numberOfDigits[i]++; }
+    }
+
 }
-else if (name == "Ewa" && age == 33)
+    Console.WriteLine("Wyniki dla liczby: " + number);
+
+for (int i = 0; i < numberOfDigits.Length; i++)
 {
-    Console.WriteLine("Ewa, lat 33");
-}
-else if (sex == 'm' && age < 18)
-{
-    Console.WriteLine("Niepełnoletni Mężczyzna");
-}
-else
-{
-    Console.WriteLine(name + ", lat " + age);
+    Console.WriteLine($"{i} => {numberOfDigits[i]}");
 }
