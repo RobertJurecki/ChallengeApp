@@ -25,7 +25,7 @@
             // act
 
             // assert
-            Assert.AreEqual(number1, number2);
+            Assert.AreEqual(name1, name2);
         }
 
         [Test]
