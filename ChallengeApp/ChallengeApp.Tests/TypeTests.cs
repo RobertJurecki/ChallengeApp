@@ -19,8 +19,8 @@
         public void ComperingTwoString()
         {
             // arrange
-            string number1 = "Janek";
-            string number2 = "Janek";
+            string name1 = "Janek";
+            string name2 = "Janek";
 
             // act
 
