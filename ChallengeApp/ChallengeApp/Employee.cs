@@ -118,7 +118,7 @@
 
             var i = 0;
 
-            while (i < this.grades.Count);
+            while (i < this.grades.Count) ;
             {
                 statistic.Max = Math.Max(statistic.Max, grades[i]);
                 statistic.Min = Math.Min(statistic.Min, grades[i]);
