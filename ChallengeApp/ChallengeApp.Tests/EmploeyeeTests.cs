@@ -48,5 +48,21 @@ namespace ChallengeApp.Tests
             // assert
             Assert.AreEqual(4, statistics.Average);
         }
+        [Test]
+        public void TestAverageLetter()
+        {
+            // arrange
+            var employee = new Employee("Hans", "Klos");
+            employee.AddGrade(20);
+            employee.AddGrade(60);
+            employee.AddGrade(80);
+            employee.AddGrade('B');
+
+            // act
+            var statistics = employee.GetStatistic();
+
+            // assert
+            Assert.AreEqual('B', statistics.AverageLetter);
+        }
     }
 }

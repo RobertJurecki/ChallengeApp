@@ -4,6 +4,11 @@
     {
         private List<float> grades = new List<float>();
 
+
+        public Employee()
+        {
+        }
+
         public Employee(string name, string surame)
         {
             this.Name = name;
@@ -50,10 +55,34 @@
             this.AddGrade(gradeAsFloat);
         }
 
-        public void AddGrade(int grade)
+        public void AddGrade(char grade)
         {
-            float gradeAsFloat = grade;
-            this.AddGrade(gradeAsFloat);
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.grades.Add(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.grades.Add(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.grades.Add(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.grades.Add(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.grades.Add(20);
+                    break;
+                default:
+                    Console.WriteLine("Niedopuszczalna litera");
+                    break;
+            }
         }
 
         public Statistics GetStatistic()
@@ -71,6 +100,26 @@
             }
 
             statistic.Average /= this.grades.Count;
+
+            switch (statistic.Average)
+            {
+                case var average when average >= 80:
+                    statistic.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistic.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistic.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistic.AverageLetter = 'D';
+                    break;
+                default:
+                    statistic.AverageLetter = 'E';
+                    break;
+            }
+
             return statistic;
         }
     }

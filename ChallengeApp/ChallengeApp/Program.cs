@@ -1,13 +1,25 @@
 ﻿using ChallengeApp;
 
-var employee = new Employee("Adam", "Kamizelich");
-employee.AddGrade("Hans");
-employee.AddGrade("3000");
-employee.AddGrade(2);
-employee.AddGrade('3');
 
-var statistics1 = employee.GetStatistic();
+Console.WriteLine("Witamy w programie do oceny pracowników");
+Console.WriteLine("============================================");
+Console.WriteLine();
 
-Console.WriteLine($"Average: {statistics.Average:N2}");
-Console.WriteLine($"Min: {statistics.Min}");
-Console.WriteLine($"Max: {statistics.Max}");
+var emploee = new Employee();
+
+while (true)
+{
+    Console.WriteLine("Podaj ocenę pracownika: Zakończenie pracy q");
+    var input = Console.ReadLine();
+    if (input == "q")
+    {
+        break;
+    }
+    emploee.AddGrade(input);
+}
+
+var statistics = emploee.GetStatistic();
+Console.WriteLine($"Średnia ocen: {statistics.Average}");
+Console.WriteLine($"Minimalna ocena: {statistics.Min}");
+Console.WriteLine($"Maksymalna ocena: {statistics.Max}");
+Console.WriteLine($"Średnia ocen w postaci literowej: {statistics.AverageLetter}");
