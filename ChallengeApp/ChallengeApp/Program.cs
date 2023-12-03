@@ -6,9 +6,9 @@ Console.WriteLine("Witamy w programie do oceny pracowników");
 Console.WriteLine("==========================================");
 Console.WriteLine();
 
-var emploee = new Employee();
+var emploee = new Employee("Hans", "Klos");
 Console.WriteLine("Wprowadź oceny pracownika: \nZakończenie pracy q\n");
-
+emploee.ToString();
 while (true)
 {
     Console.WriteLine("Podaj ocenę pracownika");
