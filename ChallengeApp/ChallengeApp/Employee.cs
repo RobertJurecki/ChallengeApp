@@ -13,7 +13,7 @@
 
         public string Surname { get; private set; }
 
-        public void AddGrade(float grade)
+        public void AddGrade(float grade, int v)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -83,21 +83,28 @@
             }
         }
 
-        public Statistics GetStatistic()
+        public void AddGrade(float grade)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Statistics CountStatistic(List<float> grades)
         {
             var statistic = new Statistics();
             statistic.Average = 0;
             statistic.Max = float.MinValue;
             statistic.Min = float.MaxValue;
 
-            foreach (var grade in this.grades)
+            foreach (var grade in grades)
             {
+                if (grade >= 0)
+                {
                 statistic.Max = Math.Max(statistic.Max, grade);
                 statistic.Min = Math.Min(statistic.Min, grade);
                 statistic.Average += grade;
+                }                
             }
-
-            statistic.Average /= this.grades.Count;
+            statistic.Average /= grades.Count;
 
             switch (statistic.Average)
             {
@@ -119,6 +126,11 @@
             }
 
             return statistic;
+        }
+
+        Statistics IEmployee.GetStatistic()
+        {
+            throw new NotImplementedException();
         }
     }
 }
