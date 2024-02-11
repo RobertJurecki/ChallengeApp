@@ -24,7 +24,7 @@
             }
             else
             {
-                throw new Exception("invalid grade value");
+                throw new Exception("Nieprawidłowa wartość oceny");
             }
         }
 
@@ -91,7 +91,7 @@
             }
             else
             {
-                throw new Exception("String in not float");
+                throw new Exception("Wprowadzona wartość nie jest cyfrą");
             }
 
         }
