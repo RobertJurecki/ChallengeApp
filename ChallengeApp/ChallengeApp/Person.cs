@@ -1,10 +1,13 @@
-﻿using System.Net.Cache;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public abstract class Person
     {
- 
+        public Person(string name, string surname)
+        {
+            this.Name = name;
+            this.Surname = surname;
+        }
+
         public Person(string name, string surname, int age, char sex)
         {
             this.Name = name;

@@ -9,6 +9,7 @@
             this.Name = name;
             this.Surname = surname;
         }
+
         public string Name { get; private set; }
 
         public string Surname { get; private set; }
@@ -25,6 +26,18 @@
             }
         }
 
+        public void AddGrade(double grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+        
+        public void AddGrade(int grade)
+        {
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
         public void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
@@ -38,21 +51,8 @@
             else
             {
                 throw new Exception("String in not float");
-            }
-                
-        }
-
-        public void AddGrade(int grade)
-        {
-            float gradeAsFloat = (float)grade;
-            this.AddGrade(gradeAsFloat);
-        }
-
-        public void AddGrade(double grade)
-        {
-            float gradeAsFloat = (float)grade;
-            this.AddGrade(gradeAsFloat);
-        }
+            }             
+        }               
 
         public void AddGrade1(string grade)
         {
@@ -151,7 +151,6 @@
                     statistic.AverageLetter = 'E';
                     break;
             }
-
             return statistic;
         }
 

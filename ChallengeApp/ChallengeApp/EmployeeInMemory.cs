@@ -2,14 +2,30 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
+
+        private List<float> grades = new List<float>();
+
         public EmployeeInMemory(string name, string surname)
             : base(name, surname)
         {
         }
-
         public override void AddGrade(float grade)
         {
-            throw new NotImplementedException();
+            if (grade >= 0 && grade <= 100)
+            {
+                this.grades.Add(grade);
+
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
+
+            }
+            else
+            {
+                throw new Exception("invalid grade value");
+            }
         }
 
         public override void AddGrade(double grade)
@@ -19,6 +35,11 @@
         }
 
         public override void AddGrade(int grade)
+        {
+            float result = grade;
+            this.AddGrade(result);
+        }
+        public override void AddGrade(long grade)
         {
             float result = grade;
             this.AddGrade(result);
@@ -75,15 +96,42 @@
 
         }
 
-        public override void AddGrade(long grade)
-        {
-            float result = grade;
-            this.AddGrade(result);
-        }
-
         public override Statistics GetStatistic()
         {
-            throw new NotImplementedException();
+            var statistic = new Statistics();
+            statistic.Average = 0;
+            statistic.Max = float.MinValue;
+            statistic.Min = float.MaxValue;
+
+            foreach (var grade in this.grades)
+            {
+                statistic.Max = Math.Max(statistic.Max, grade);
+                statistic.Min = Math.Min(statistic.Min, grade);
+                statistic.Average += grade;
+            }
+
+            statistic.Average /= this.grades.Count;
+
+            switch (statistic.Average)
+            {
+                case var average when average >= 80:
+                    statistic.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistic.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistic.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistic.AverageLetter = 'D';
+                    break;
+                default:
+                    statistic.AverageLetter = 'E';
+                    break;
+            }
+
+            return statistic;
         }
     }
 }

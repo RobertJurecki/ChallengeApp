@@ -9,11 +9,12 @@
             this.Name = name;
             this.Surname = surname;
         }
+
         public string Name { get; private set; }
 
         public string Surname { get; private set; }
 
-        public void AddGrade(float grade, int v)
+        public void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -21,8 +22,20 @@
             }
             else
             {
-                throw new Exception("Invalid grade value");
+                throw new Exception("Nieprawidłowa wartość oceny");
             }
+        }
+
+        public void AddGrade(double grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
+        public void AddGrade(int grade)
+        {
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
         }
 
         public void AddGrade(string grade)
@@ -37,21 +50,8 @@
             }
             else
             {
-                throw new Exception("String in not float");
+                throw new Exception("Wprowadzona wartość nie jest cyfrą");
             }
-                
-        }
-
-        public void AddGrade(int grade)
-        {
-            float gradeAsFloat = (float)grade;
-            this.AddGrade(gradeAsFloat);
-        }
-
-        public void AddGrade(double grade)
-        {
-            float gradeAsFloat = (float)grade;
-            this.AddGrade(gradeAsFloat);
         }
 
         public void AddGrade(char grade)
@@ -83,28 +83,21 @@
             }
         }
 
-        public void AddGrade(float grade)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Statistics CountStatistic(List<float> grades)
+        public Statistics GetStatistic()
         {
             var statistic = new Statistics();
             statistic.Average = 0;
             statistic.Max = float.MinValue;
             statistic.Min = float.MaxValue;
 
-            foreach (var grade in grades)
+            foreach (var grade in this.grades)
             {
-                if (grade >= 0)
-                {
                 statistic.Max = Math.Max(statistic.Max, grade);
                 statistic.Min = Math.Min(statistic.Min, grade);
                 statistic.Average += grade;
-                }                
             }
-            statistic.Average /= grades.Count;
+
+            statistic.Average /= this.grades.Count;
 
             switch (statistic.Average)
             {
@@ -126,11 +119,6 @@
             }
 
             return statistic;
-        }
-
-        Statistics IEmployee.GetStatistic()
-        {
-            throw new NotImplementedException();
         }
     }
 }
