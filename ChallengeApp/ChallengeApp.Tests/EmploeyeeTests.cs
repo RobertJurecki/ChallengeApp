@@ -6,7 +6,7 @@ namespace ChallengeApp.Tests
         public void TestMin()
         {
             // arrange
-            var employee = new Employee("Hans", "Klos");
+            var employee = new EmployeeInMemory("Hans", "Klos");
             employee.AddGrade(1);
             employee.AddGrade(3);
             employee.AddGrade(8);
@@ -22,7 +22,7 @@ namespace ChallengeApp.Tests
         public void TestMax()
         {
             // arrange
-            var employee = new Employee("Hans", "Klos");
+            var employee = new EmployeeInMemory("Hans", "Klos");
             employee.AddGrade(1);
             employee.AddGrade(3);
             employee.AddGrade(8);
@@ -37,7 +37,7 @@ namespace ChallengeApp.Tests
         public void TestAverage()
         {
             // arrange
-            var employee = new Employee("Hans", "Klos");
+            var employee = new EmployeeInMemory("Hans", "Klos");
             employee.AddGrade(1);
             employee.AddGrade(3);
             employee.AddGrade(8);
@@ -52,7 +52,7 @@ namespace ChallengeApp.Tests
         public void TestAverageLetter()
         {
             // arrange
-            var employee = new Employee("Hans", "Klos");
+            var employee = new EmployeeInMemory("Hans", "Klos");
             employee.AddGrade(20);
             employee.AddGrade(60);
             employee.AddGrade(80);
