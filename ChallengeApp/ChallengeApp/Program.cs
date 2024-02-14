@@ -9,7 +9,7 @@ Console.WriteLine("|                              |");
 Console.WriteLine("================================");
 Console.WriteLine();
 
-var employee = new EmployeeInMemory("Hans", "Klos");
+var employee = new EmployeeInFile("Hans", "Klos");
 employee.GradeAdded += EmployeeGradeAdded;
 
 Console.WriteLine("Wprowadź oceny pracownika: \nZakończenie pracy q\n");

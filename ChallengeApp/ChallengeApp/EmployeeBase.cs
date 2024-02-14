@@ -18,16 +18,14 @@
          
         public abstract void AddGrade(float grade);
 
-        public abstract void AddGrade(string grade);
+        public abstract void AddGrade(double grade);
 
         public abstract void AddGrade(int grade);
 
-        public abstract void AddGrade(long grade);
-
-        public abstract void AddGrade(double grade);
-
         public abstract void AddGrade(char grade);
-                         
+
+        public abstract void AddGrade(string grade);
+                      
         public abstract Statistics GetStatistic();
         
     }

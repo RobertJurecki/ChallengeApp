@@ -16,6 +16,8 @@
 
         void AddGrade(string grade);
 
+        //event GradeAddedDelegate GradeAdded;
+
         Statistics GetStatistic();
     }
 }

@@ -2,13 +2,13 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public override event GradeAddedDelegate GradeAdded;
         private const string filename = "grades.txt";
+
+        public override event GradeAddedDelegate GradeAdded;
 
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {
-
         }
 
         public override void AddGrade(float grade)
@@ -17,14 +17,14 @@
             {
                 using (var writer = File.AppendText(filename))
                 {
+
                     writer.WriteLine(grade);
-                    
-                    if (GradeAdded != null)
-                    {
-                        GradeAdded(this, new EventArgs());
-                    }
                 }
-                
+
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
@@ -53,11 +53,7 @@
             float result = grade;
             this.AddGrade(result);
         }
-        public override void AddGrade(long grade)
-        {
-            float result = grade;
-            this.AddGrade(result);
-        }
+
         public override void AddGrade(double grade)
         {
             float result = (float)grade;
@@ -97,70 +93,23 @@
                     throw new Exception("Niedopuszczalna litera");
             }
         }
-
         public override Statistics GetStatistic()
         {
-            var gradesFromFile = this.ReadGradesFromFile();
-            var result = this.CountStatistic(gradesFromFile);
-            return result;
-        }
-
-        private List<float> ReadGradesFromFile()
-    {
-        var grades = new List<float>();
-        if (File.Exists($"{filename}"))
-        {
-            using (var reader = File.OpenText($"{filename}"))
+            var statistics = new Statistics();
+            if (File.Exists($"{filename}"))
             {
-                var line = reader.ReadLine();
-                while (line != null)
+                using (var reader = File.OpenText($"{filename}"))
                 {
-                    var number = float.Parse(line);
-                    grades.Add(number);
-                    line = reader.ReadLine();
+                    var line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        var number = float.Parse(line);
+                        statistics.AddGrade(number);
+                        line = reader.ReadLine();
+                    }
                 }
             }
-        }
-        return grades;
-    }
-        private Statistics CountStatistic(List<float> grades)
-        {
-            var statistic = new Statistics();
-            statistic.Average = 0;
-            statistic.Max = float.MinValue;
-            statistic.Min = float.MaxValue;
-
-            foreach (var grade in grades)
-            {
-                if (grade >= 0)
-                {
-                    statistic.Max = Math.Max(statistic.Max, grade);
-                    statistic.Min = Math.Min(statistic.Min, grade);
-                    statistic.Average += grade;
-                }
-            }
-            statistic.Average /= grades.Count;
-
-            switch (statistic.Average)
-            {
-                case var average when average >= 80:
-                    statistic.AverageLetter = 'A';
-                    break;
-                case var average when average >= 60:
-                    statistic.AverageLetter = 'B';
-                    break;
-                case var average when average >= 40:
-                    statistic.AverageLetter = 'C';
-                    break;
-                case var average when average >= 20:
-                    statistic.AverageLetter = 'D';
-                    break;
-                default:
-                    statistic.AverageLetter = 'E';
-                    break;
-            }
-
-            return statistic;
+            return statistics;
         }
     }
 }
